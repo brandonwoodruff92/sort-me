@@ -1,0 +1,58 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+}
+
+.algorithm-dropdown, .main-content-screen,
+  .personal-info, .data-size-selection {
+  background-color: grey;
+}
+
+.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.algorithm-dropdown {
+  width: 800px;
+  height: 100px;
+}
+
+.page-content {
+  display: flex;
+  justify-content: center;
+}
+
+.main-content-screen {
+  width: 800px;
+  height: 600px;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.personal-info {
+  width: 300px;
+}
+
+.data-size-selection {
+  width: 200px;
+}
+
+.personal-info, .data-size-selection {
+  height: 500px;
+}
+
+#render-screen {
+  width: 700px;
+  height: 500px;
+  background-color: white;
+  display: flex;
+}
