@@ -83,6 +83,71 @@ class AnimatedArray {
     }
   }
 
+  selectionSort() {
+    let minIdx;
+
+    for (let i = 0; i < this.arr.length - 1; i++) {
+      minIdx = i;
+
+      for (let j = i + 1; j < this.arr.length; j++) {
+        const comparison = this._compare(minIdx, j);
+
+        if (comparison === 1) {
+          minIdx = j;
+        }
+      }
+
+      this._swap(i, minIdx);
+    }
+  }
+
+  insertionSort() {
+    for (let i = 1; i < this.arr.length; i++) {
+      for (let j = i; j > 0 && this._compare(j, j - 1 ) === -1; j--) {
+        this._swap(j, j - 1);
+      }
+    }
+  }
+
+  quickSort() {
+    this._recQuickSort(this.arr);
+  }
+
+  _recQuickSort(arr, left = 0, right) {
+    if (typeof(right) === "undefined") {
+      right = arr.length - 1;
+    }
+
+    if (left >= right) {
+      return;
+    }
+
+    let pivot = this._partition(arr, left, right);
+
+    this._recQuickSort(arr, left, pivot - 1);
+    this._recQuickSort(arr, pivot + 1, right);
+  }
+
+  _partition(arr, left, right) {
+    let pivot = left;
+
+    this._swap(pivot, right);
+
+    for (let i = left; i < right; i++) {
+      const compare = this._compare(i, right);
+
+      if (compare === -1) {
+        if (i !== pivot) {
+          this._swap(i, pivot);
+        }
+        pivot++;
+      }
+    }
+
+    this._swap(right, pivot);
+
+    return pivot;
+  }
 
   _step() {
     //Get the next action from the action buffer and complete the action.

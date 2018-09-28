@@ -1,16 +1,29 @@
 const Algorithms = {
-  BUBBLE_SORT: "bubbleSort"
+  BUBBLE_SORT: "bubbleSort",
+  SELECTION_SORT: "selectionSort",
+  INSERTION_SORT: "insertionSort",
+  QUICK_SORT: "quickSort"
 };
 Object.freeze(Algorithms);
 
 class SortMe {
-  static run(arr, interval, sort) {
+  static run(arr, sort) {
+    const interval = 1000 / arr.length;
     const renderScreen = document.getElementById("render-screen");
     const animatedArr = new AnimatedArray(arr, renderScreen, interval);
 
     switch (sort) {
       case Algorithms.BUBBLE_SORT:
         animatedArr.bubbleSort();
+        break;
+      case Algorithms.SELECTION_SORT:
+        animatedArr.selectionSort();
+        break;
+      case Algorithms.INSERTION_SORT:
+        animatedArr.insertionSort();
+        break;
+      case Algorithms.QUICK_SORT:
+        animatedArr.quickSort();
         break;
       default:
         break;

@@ -51,7 +51,6 @@ class DisplayArray {
   }
 
   setState(i, state) {
-    console.log(this.bars);
     const displayPair = this.bars[i];
     displayPair[1] = state;
   }
