@@ -13,9 +13,9 @@ var Actions = {
 Object.freeze(Actions);
 
 const COLORS = {
-  "default": "#EE6055",
-  "swap": "#FFD97D",
-  "compare": "#FF9B85",
+  "default": "#ff1000",
+  "swap": "#ff1000",
+  "compare": "#ccc",
   "sorted": "#AAF683"
 };
 Object.freeze(COLORS);
@@ -51,9 +51,11 @@ class AnimatedArray {
     for (let i = 0; i < this.displayArr.length; i++) {
       const barDisplay = this.displayArr.get(i);
       const bar = barDisplay[0];
-      const state = barDisplay[1];
+      const hueRotate = `${barDisplay[1]}deg`;
+      const state = barDisplay[2];
 
       bar.style.background = COLORS[state];
+      bar.style.filter = `hue-rotate(${hueRotate})`;
 
       this.renderScreen.appendChild(bar);
     }

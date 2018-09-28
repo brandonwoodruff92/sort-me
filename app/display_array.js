@@ -6,7 +6,8 @@ class DisplayArray {
     this.screenWidth = renderScreen.clientWidth;
 
     for (let i = 0; i < arr.length; i++) {
-      const displayPair = [this.buildBar(arr[i], i), States.DEFAULT_STATE];
+      const hueRotate = arr[i] * this.getHueScale();
+      const displayPair = [this.buildBar(arr[i], i), hueRotate, States.DEFAULT_STATE];
       this.bars.push(displayPair);
     }
   }
@@ -52,12 +53,12 @@ class DisplayArray {
 
   setState(i, state) {
     const displayPair = this.bars[i];
-    displayPair[1] = state;
+    displayPair[2] = state;
   }
 
   buildBar(ele, i) {
     const bar = document.createElement("div");
-    const barHeight = (ele) * this.getBarHeightScale();
+    const barHeight = ele * this.getBarHeightScale();
     const barWidth = this.getBarWidth();
     const marginTop = this.screenHeight - barHeight;
 
@@ -75,5 +76,9 @@ class DisplayArray {
 
   getBarHeightScale() {
     return this.screenHeight / this.length;
+  }
+
+  getHueScale() {
+    return 360 / this.length;
   }
 }

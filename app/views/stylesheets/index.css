@@ -6,8 +6,7 @@
   background-color: blue;
 }
 
-.algorithm-dropdown, .main-content-screen,
-  .personal-info, .data-size-selection {
+.sorting-menu, .main-content-screen {
   background-color: grey;
 }
 
@@ -18,7 +17,7 @@
   margin: 40px 0;
 }
 
-.algorithm-dropdown {
+.sorting-menu {
   width: 800px;
   height: 100px;
 }
@@ -29,7 +28,7 @@
 }
 
 .main-content-screen {
-  width: 800px;
+  width: 1000px;
   height: 600px;
   margin: 0 20px;
   display: flex;
@@ -38,21 +37,10 @@
   align-items: center;
 }
 
-.personal-info {
-  width: 300px;
-}
-
-.data-size-selection {
-  width: 200px;
-}
-
-.personal-info, .data-size-selection {
-  height: 500px;
-}
-
 #render-screen {
-  width: 700px;
-  height: 500px;
+  width: 80%;
+  height: 80%;
+  margin-top: -40px;
   background-color: white;
   display: flex;
 }

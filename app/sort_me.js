@@ -8,7 +8,7 @@ Object.freeze(Algorithms);
 
 class SortMe {
   static run(arr, sort) {
-    const interval = 1000 / arr.length;
+    const interval = 5000 / arr.length;
     const renderScreen = document.getElementById("render-screen");
     const animatedArr = new AnimatedArray(arr, renderScreen, interval);
 
