@@ -14,8 +14,9 @@ Object.freeze(Actions);
 
 const COLORS = {
   "default": "#ff1000",
-  "swap": "#ff1000",
-  "compare": "#ccc",
+  "swap": "#777775",
+  "compare": "#777775",
+  // "compare": "#ff1000",
   "sorted": "#AAF683"
 };
 Object.freeze(COLORS);
@@ -41,7 +42,55 @@ class AnimatedArray {
     this.displayArr = new DisplayArray(arr, renderScreen);
     this.actionBuffer = new ActionBuffer();
     this._step = this._step.bind(this);
-    this.interval = window.setInterval(this._step, interval);
+    this.intervalAmount = interval;
+    this.isSorted = false;
+    this._render();
+  }
+
+  isSorted() {
+    return this.isSorted;
+  }
+
+  isRunning() {
+    return this.interval ? true : false;
+  }
+
+  run() {
+    if (this.sort) {
+      this.interval = window.setInterval(this._step, this.intervalAmount);
+      switch (this.sort) {
+        case Algorithms.BUBBLE_SORT:
+          this.bubbleSort();
+          break;
+        case Algorithms.SELECTION_SORT:
+          this.selectionSort();
+          break;
+        case Algorithms.INSERTION_SORT:
+          this.insertionSort();
+          break;
+        case Algorithms.QUICK_SORT:
+          this.quickSort();
+          break;
+        case Algorithms.MERGE_SORT:
+          this.mergeSort();
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  shuffle() {
+    SortMe._shuffle(this.arr);
+    this.displayArr = new DisplayArray(this.arr, this.renderScreen);
+  }
+
+  setSort(sort) {
+    this.sort = sort;
+  }
+
+  size() {
+    return this.displayArr.length;
   }
 
   _render() {
@@ -54,11 +103,26 @@ class AnimatedArray {
       const hueRotate = `${barDisplay[1]}deg`;
       const state = barDisplay[2];
 
-      bar.style.background = COLORS[state];
-      bar.style.filter = `hue-rotate(${hueRotate})`;
+      const barContainer = this._prepareBar(bar, hueRotate, state);
 
-      this.renderScreen.appendChild(bar);
+      this.renderScreen.appendChild(barContainer);
     }
+  }
+
+  _prepareBar(barContainer, hueRotate, state) {
+    const bar = barContainer.getElementsByClassName("chart-bar")[0];
+    const backgroundBar = barContainer.getElementsByClassName("background-bar")[0];
+
+    if (state === States.COMPARE_STATE) {
+      backgroundBar.style.opacity = "0.5";
+    } else if (state === States.DEFAULT_STATE) {
+      backgroundBar.style.opacity = "0";
+    }
+
+    bar.style.background = COLORS[state];
+    bar.style.filter = `hue-rotate(${hueRotate})`;
+
+    return barContainer;
   }
 
   _clearScreen() {
@@ -69,11 +133,12 @@ class AnimatedArray {
 
   bubbleSort() {
     let sorted = false;
+    let n = this.arr.length;
 
     while (!sorted) {
       sorted = true;
 
-      for (let i = 0; i < this.arr.length - 1; i++) {
+      for (let i = 0; i < n - 1; i++) {
         const j = i + 1;
         const comparison = this._compare(i, j);
 
@@ -82,10 +147,13 @@ class AnimatedArray {
           sorted = false;
         }
       }
+
+      n--;
     }
   }
 
   selectionSort() {
+
     let minIdx;
 
     for (let i = 0; i < this.arr.length - 1; i++) {
@@ -101,6 +169,8 @@ class AnimatedArray {
 
       this._swap(i, minIdx);
     }
+
+
   }
 
   insertionSort() {
@@ -151,12 +221,48 @@ class AnimatedArray {
     return pivot;
   }
 
+  mergeSort() {
+    this._recMergeSort(this.arr);
+  }
+
+  _recMergeSort(arr, first = 0, last) {
+    if (typeof(last) === "undefined") {
+      last = arr.length - 1;
+    }
+
+    if (first >= last) {
+      return;
+    }
+
+    const mid = Math.floor((first + last) / 2);
+
+    this._recMergeSort(arr, first, mid);
+    this._recMergeSort(arr, mid + 1, last);
+
+    let left = first;
+    let right = mid + 1;
+
+    if (this._compare(mid, right) <= 0) {
+      return;
+    }
+
+    while (left <= mid && right <= last) {
+      if (this._compare(left, right) <= 0) {
+        left++;
+      } else {
+        this._swap(left, right);
+      }
+    }
+  }
+
   _step() {
     //Get the next action from the action buffer and complete the action.
 
     if (this.actionBuffer.length() <= 0) {
       this._render();
       clearInterval(this.interval);
+      this.interval = null;
+      this.isSorted = true;
       return;
     }
 

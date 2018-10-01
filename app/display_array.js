@@ -57,7 +57,11 @@ class DisplayArray {
   }
 
   buildBar(ele, i) {
+    const barContainer = document.createElement("div");
     const bar = document.createElement("div");
+    const backgroundBar = document.createElement("div");
+
+
     const barHeight = ele * this.getBarHeightScale();
     const barWidth = this.getBarWidth();
     const marginTop = this.screenHeight - barHeight;
@@ -67,7 +71,19 @@ class DisplayArray {
     bar.style.width = `${barWidth}px`;
     bar.style.marginTop = `${marginTop}px`;
 
-    return bar;
+    backgroundBar.className = "background-bar";
+    backgroundBar.style.width = `${barWidth}px`;
+    backgroundBar.style.height = `${this.screenHeight}px`;
+    backgroundBar.style.background = "#f2dc35";
+    backgroundBar.style.opacity = "0";
+
+    barContainer.className = "bar-container";
+    barContainer.style.width = `${barWidth}px`;
+    barContainer.style.height = `${this.screenHeight}px`;
+    barContainer.appendChild(bar);
+    barContainer.appendChild(backgroundBar);
+
+    return barContainer;
   }
 
   getBarWidth() {

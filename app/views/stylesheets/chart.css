@@ -1,4 +1,16 @@
+.bar-container {
+  height: 100%;
+  position: relative;
+}
+
 .chart-bar {
   background-color: red;
   border: 1px solid black;
+  z-index: 3;
+}
+
+.background-bar {
+  position: absolute;
+  top: 0;
+  height: 100%;
 }

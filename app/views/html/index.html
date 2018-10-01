@@ -19,21 +19,53 @@
   </head>
 
   <body class="page">
-    <div class="page-header">
+    <div class="main-content-screen">
+      <div id="render-screen">
+      </div>
       <div class="sorting-menu">
-        <div class="algorithm-selection">
-          algorithm selection
-        </div>
-        <div class="data-size-selection">
+        <form class="algorithm-form">
+          <input
+          id="algorithm-submit"
+          class="algorithm-action"
+          type="submit"
+          value="Run" />
+          <div class="form-selection">
+            <select>
+              <option value="selectionSort">Selection Sort</option>
+              <option value="insertionSort">Insertion Sort</option>
+              <option value="bubbleSort">Bubble Sort</option>
+              <option value="quickSort">Quick Sort</option>
+            </select>
+            <input
+            id="array-size-selection"
+            type="number"
+            name="quantity"
+            min="10"
+            max="200"
+            step="5"
+            value="10" />
+          </div>
+        </form>
+      </div>
+    </div>
 
-        </div>
-      </div>
-    </div>
-    <div class="page-content">
-      <div class="main-content-screen">
-        <div id="render-screen">
-        </div>
-      </div>
-    </div>
+    <script>
+      const initSize = document.getElementById("array-size-selection").value;
+      const sortMe = new SortMe(initSize);
+
+      const sizeSelect = document.getElementById("array-size-selection");
+      sizeSelect.addEventListener("input", (e) => {
+        sortMe.setSize(e.target.value);
+      });
+
+      const algoForm = document.querySelector(".algorithm-form");
+      algoForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const sort = algoForm[1].value;
+        sortMe.run(sort);
+      });
+
+    </script>
   </body>
 </html>

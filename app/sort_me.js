@@ -1,33 +1,45 @@
-const Algorithms = {
+var Algorithms = {
   BUBBLE_SORT: "bubbleSort",
   SELECTION_SORT: "selectionSort",
   INSERTION_SORT: "insertionSort",
-  QUICK_SORT: "quickSort"
+  QUICK_SORT: "quickSort",
+  MERGE_SORT: "mergeSort"
 };
 Object.freeze(Algorithms);
 
 class SortMe {
-  static run(arr, sort) {
-    const interval = 5000 / arr.length;
-    const renderScreen = document.getElementById("render-screen");
-    const animatedArr = new AnimatedArray(arr, renderScreen, interval);
+  constructor(size) {
+    this.interval = 1000 / size;
+    this.size = size;
+    this.renderScreen = document.getElementById("render-screen");
+    this.animatedArr = new AnimatedArray(SortMe.randomArr(size), this.renderScreen, this.interval);
+  }
 
-    switch (sort) {
-      case Algorithms.BUBBLE_SORT:
-        animatedArr.bubbleSort();
-        break;
-      case Algorithms.SELECTION_SORT:
-        animatedArr.selectionSort();
-        break;
-      case Algorithms.INSERTION_SORT:
-        animatedArr.insertionSort();
-        break;
-      case Algorithms.QUICK_SORT:
-        animatedArr.quickSort();
-        break;
-      default:
-        break;
+  run(sort) {
+    if (!this.animatedArr.isRunning()) {
+      if (this.animatedArr.isSorted) {
+        this.animatedArr.shuffle();
+      }
+
+      this.animatedArr.setSort(sort);
+      this.animatedArr.run();
     }
+  }
+
+  size() {
+    return this.animatedArr.size();
+  }
+
+  setSize(size) {
+    this.size = size;
+
+    if (!this.animatedArr.isRunning()) {
+      this.animatedArr = new AnimatedArray(SortMe.randomArr(size), this.renderScreen, this.interval);
+    }
+  }
+
+  isRunning() {
+    return this.animatedArr.isRunning();
   }
 
   static randomArr(size) {

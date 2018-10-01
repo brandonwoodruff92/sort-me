@@ -1,46 +1,46 @@
 .page {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: blue;
-}
-
-.sorting-menu, .main-content-screen {
-  background-color: grey;
-}
-
-.page-header {
+  height: -webkit-fill-available;
+  margin: auto;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40px 0;
-}
-
-.sorting-menu {
-  width: 800px;
-  height: 100px;
-}
-
-.page-content {
-  display: flex;
-  justify-content: center;
 }
 
 .main-content-screen {
-  width: 1000px;
-  height: 600px;
-  margin: 0 20px;
+  background-color: grey;
+}
+
+.main-content-screen {
+  width: 95%;
+  height: 740px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.sorting-menu {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  width: 50%;
+}
+
+.algorithm-form {
+  display: flex;
+  align-items: baseline;
 }
 
 #render-screen {
-  width: 80%;
-  height: 80%;
-  margin-top: -40px;
+  width: 95%;
+  height: 87%;
   background-color: white;
   display: flex;
+  margin-bottom: 4%;
+}
+
+#algorithm-submit {
+  margin-right: 46%;
 }
