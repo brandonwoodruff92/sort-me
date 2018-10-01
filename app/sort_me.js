@@ -8,20 +8,21 @@ var Algorithms = {
 Object.freeze(Algorithms);
 
 class SortMe {
-  constructor(size) {
+  constructor(size, sort) {
     this.interval = 1000 / size;
     this.size = size;
+    this.sort = sort;
     this.renderScreen = document.getElementById("render-screen");
     this.animatedArr = new AnimatedArray(SortMe.randomArr(size), this.renderScreen, this.interval);
   }
 
-  run(sort) {
+  run() {
     if (!this.animatedArr.isRunning()) {
       if (this.animatedArr.isSorted) {
         this.animatedArr.shuffle();
       }
 
-      this.animatedArr.setSort(sort);
+      this.animatedArr.setSort(this.sort);
       this.animatedArr.run();
     }
   }
@@ -36,6 +37,10 @@ class SortMe {
     if (!this.animatedArr.isRunning()) {
       this.animatedArr = new AnimatedArray(SortMe.randomArr(size), this.renderScreen, this.interval);
     }
+  }
+
+  setSort(sort) {
+    this.sort = sort;
   }
 
   isRunning() {

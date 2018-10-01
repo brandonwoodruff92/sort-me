@@ -26,34 +26,61 @@
       </div>
       <div class="sorting-menu">
         <form class="algorithm-form">
+          <div class="select-scroll">
+            <div value="selectionSort">Selection Sort</div>
+            <div value="insertionSort">Insertion Sort</div>
+            <div value="bubbleSort">Bubble Sort</div>
+            <div value="quickSort">Quick Sort</div>
+          </div>
+
           <input
           id="algorithm-submit"
           class="algorithm-action"
           type="submit"
           value="Run" />
-          <div class="form-selection">
-            <select>
-              <option value="selectionSort">Selection Sort</option>
-              <option value="insertionSort">Insertion Sort</option>
-              <option value="bubbleSort">Bubble Sort</option>
-              <option value="quickSort">Quick Sort</option>
-            </select>
-            <input
-            id="array-size-selection"
-            type="number"
-            name="quantity"
-            min="10"
-            max="200"
-            step="5"
-            value="10" />
-          </div>
+
+          <input
+          id="array-size-selection"
+          type="number"
+          name="quantity"
+          min="10"
+          max="200"
+          step="5"
+          value="10" />
         </form>
       </div>
     </div>
 
     <script>
       const initSize = document.getElementById("array-size-selection").value;
-      const sortMe = new SortMe(initSize);
+      const sortMe = new SortMe(initSize, "selectionSort"); //remove hardcoded default
+
+      const scrollSelect = document.querySelector(".select-scroll");
+      scrollSelect.addEventListener("scroll", () => {
+        //Find a more DRY way
+
+        let scrollTop = scrollSelect["scrollTop"];
+        let selection;
+
+        switch (scrollTop) {
+          case 0:
+            selection = "selectionSort";
+            break;
+          case 51:
+            selection = "insertionSort";
+            break;
+          case 102:
+            selection = "bubbleSort";
+            break;
+          case 153:
+            selection = "quickSort";
+            break;
+          default:
+            return;
+        }
+
+        sortMe.setSort(selection);
+      });
 
       const sizeSelect = document.getElementById("array-size-selection");
       sizeSelect.addEventListener("input", (e) => {
