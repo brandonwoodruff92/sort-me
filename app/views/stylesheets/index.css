@@ -9,6 +9,7 @@
 
 .main-content-screen {
   background-color: grey;
+  border-radius: 10px;
 }
 
 .main-content-screen {
@@ -23,8 +24,8 @@
 
 .sorting-menu {
   position: absolute;
-  bottom: 3%;
-  left: 50%;
+  bottom: 2%;
+  left: 46.5%;
   width: 50%;
 }
 
@@ -42,5 +43,18 @@
 }
 
 #algorithm-submit {
+  border: 1px solid black;
+  border-radius: 25%;
   margin-right: 46%;
+  background-color: #1723FF;
+  padding: 5px 20px;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 25px;
+  color: #FFE500;
+  outline: none;
+}
+
+#algorithm-submit:hover {
+  color: #BCAA0B;
+  background-color: #010AAD;
 }
