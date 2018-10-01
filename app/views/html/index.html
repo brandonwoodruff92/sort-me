@@ -14,6 +14,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
     <script src="../../sort_me.js"></script>
     <script src="../../animated_array.js"></script>
     <script src="../../display_array.js"></script>
@@ -39,20 +41,23 @@
           type="submit"
           value="Run" />
 
-          <input
-          id="array-size-selection"
-          type="number"
-          name="quantity"
-          min="10"
-          max="200"
-          step="5"
-          value="10" />
+          <div class="size-selection">
+            <div
+              id="array-size"
+              value="10">
+              10
+            </div>
+            <div class="incrementors">
+              <div id="arrow-up" class="fas fa-angle-up"></div>
+              <div id="arrow-down" class="fas fa-angle-up"></div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
 
     <script>
-      const initSize = document.getElementById("array-size-selection").value;
+      const initSize = document.getElementById("array-size").getAttribute('value');
       const sortMe = new SortMe(initSize, "selectionSort"); //remove hardcoded default
 
       const scrollSelect = document.querySelector(".select-scroll");
@@ -83,16 +88,11 @@
       });
 
       const sizeSelect = document.getElementById("array-size-selection");
-      sizeSelect.addEventListener("input", (e) => {
-        sortMe.setSize(e.target.value);
-      });
 
       const algoForm = document.querySelector(".algorithm-form");
       algoForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
-        const sort = algoForm[1].value;
-        sortMe.run(sort);
+        sortMe.run();
       });
 
     </script>
