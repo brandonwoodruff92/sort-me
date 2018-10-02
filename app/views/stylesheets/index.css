@@ -62,7 +62,7 @@
   font-family: 'Permanent Marker', cursive;
   font-size: 25px;
   scroll-snap-align: start;
-  cursor: default;
+  cursor: ns-resize;
 }
 
 /* .select-scroll div:hover {
