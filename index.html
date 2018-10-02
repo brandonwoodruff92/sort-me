@@ -8,18 +8,18 @@
     <meta name="description" content="Visualize sorting in real time!">
     <meta name="author" content="Brandon Woodruff">
 
-    <link rel="stylesheet" href="../stylesheets/index.css">
-    <link rel="stylesheet" href="../stylesheets/chart.css">
-    <link rel="stylesheet" href="../stylesheets/reset.css">
+    <link rel="stylesheet" href="app/views/stylesheets/index.css">
+    <link rel="stylesheet" href="app/views/stylesheets/chart.css">
+    <link rel="stylesheet" href="app/views/stylesheets/reset.css">
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <script src="../../sort_me.js"></script>
-    <script src="../../animated_array.js"></script>
-    <script src="../../display_array.js"></script>
-    <script src="../../action_buffer.js"></script>
+    <script src="app/sort_me.js"></script>
+    <script src="app/animated_array.js"></script>
+    <script src="app/display_array.js"></script>
+    <script src="app/action_buffer.js"></script>
   </head>
 
   <body class="page">
@@ -95,6 +95,27 @@
         sortMe.run();
       });
 
+      const downArrow = document.getElementById("arrow-down");
+      const upArrow = document.getElementById("arrow-up");
+      const arraySize = document.getElementById("array-size");
+
+      downArrow.addEventListener("click", () => {
+        const size = parseInt(arraySize.getAttribute('value')) - 5;
+        if (size >= 10 && size <= 100) {
+          arraySize.setAttribute('value', size);
+          arraySize.innerHTML = size;
+          sortMe.setSize(size);
+        }
+      });
+
+      upArrow.addEventListener("click", () => {
+        const size = parseInt(arraySize.getAttribute('value')) + 5;
+        if (size >= 10 && size <= 100) {
+          arraySize.setAttribute('value', size);
+          arraySize.innerHTML = size;
+          sortMe.setSize(size);
+        }
+      });
     </script>
   </body>
 </html>
