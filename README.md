@@ -6,19 +6,52 @@ A way to visualize sorting algorithms in real-time!
 2. Populate it with varying sizes of data.
 3. Let it run and see the results!
 
-This project will only be using jQuery for rendering algorithms.
+Algorithms Supported:
 
-### Wireframes
+- Selection Sort
+- Quick Sort
+- Bubble Sort
+- Insertion Sort
 
-Sort Me will consist of a main content section in the middle to display the unsorted data in the form of bars varying in size. All animation related to the visualization of sorting will be rendered in the main content section. Above the main content section will be an algorithm drop-down which a user can click on to select the various sorting algorithms to see. This will also contain a button that the user will click in order to run the animation. On the right side, will be a data size selection which will feature data of varying sizes to compare the effects of data size on each algorithm. This area will also display the amount of time it took to sort. Finally, on the left will contain all of my personal information, including links to this github, as well as links to my LinkedIn profile for nessecary contact.
+Live Link: http://brandonwoodruff.io/sort-me/
 
-![Screenshot](wireframe.png)
+![screen shot 2018-10-02 at 14 43 21](https://user-images.githubusercontent.com/29648862/46369702-b704dd00-c651-11e8-8619-07dfd644bc12.png)
 
-### Implementation Timeline
+![screen shot 2018-10-02 at 14 45 56](https://user-images.githubusercontent.com/29648862/46369795-f4696a80-c651-11e8-90a1-b8b95925a4b7.png)
 
-Day 1 - Prepare each sorting algorithm that will be featured in this application. This will also include a time calculation to be used for frontend display.
+![screen shot 2018-10-02 at 14 48 52](https://user-images.githubusercontent.com/29648862/46369958-54f8a780-c652-11e8-926c-423efb40f1a9.png)
 
-Day 2 - Set up basic frontend layout, including main content section, algorithm dropdown, data size selection, and personal contact information.
+## Technology Used
 
-Day 3 - Physically render algorithms in the main content section and create animation.
+- Vanilla JS DOM Manipulation
+- HTML5
+- CSS3
 
+## Features 
+
+- Scrollable algorithm selection.
+- Incremented data size selection (10-100 elements).
+- Hue-rotation gradiant scale across data bars for easy visualization of sorted elements.
+- Dynamically resizing bars.
+
+## Summary
+
+This project was inspired by my desire to help people understand the fundementals of programming as a whole. I have found that programming is rarely visual, and a lot of the core concepts are purely abstract. Sorting algorithms, and time complexity, is a topic that many struggle to grasp, yet serves as the basis for many advanced programming concepts. With Sort-Me, my goal is to allow people to clearly see what is happening in the algorithm as it happens, so they can better understand their usage and speed.
+
+## AnimatedArray
+
+AnimatedArray is a wrapper class for integer arrays that has built-in sorting algorithm functions. These algorithms are designed to mimic common sorting algorithms by sending actions to an action buffer, such as swap and compare, and render the array onto the screen at set intervals. AnimatedArray is composed of the following:
+
+arr: Original array used for computation.
+
+displayArr: A copy of the original array which is parsed into and array of div "bars" with sizes equal to the values in the original array.
+
+renderScreen: The screen which will render all of the displayArr bars.
+
+intervalAmount: The amount of time (ms) to set the rendering interval at.
+
+## Todo
+
+- Merge Sort
+- Heap Sort
+- Search Algorithms
