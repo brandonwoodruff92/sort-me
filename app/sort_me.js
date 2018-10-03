@@ -3,13 +3,16 @@ var Algorithms = {
   SELECTION_SORT: "selectionSort",
   INSERTION_SORT: "insertionSort",
   QUICK_SORT: "quickSort",
-  MERGE_SORT: "mergeSort"
+  MERGE_SORT: "mergeSort",
+  HEAP_SORT: "heapSort"
 };
 Object.freeze(Algorithms);
 
+const INTERVAL_DELTA = 3000;
+
 class SortMe {
   constructor(size, sort) {
-    this.interval = 1000 / size;
+    this.interval = SortMe.getInterval(size);
     this.size = size;
     this.sort = sort;
     this.renderScreen = document.getElementById("render-screen");
@@ -33,6 +36,7 @@ class SortMe {
 
   setSize(size) {
     this.size = size;
+    this.interval = SortMe.getInterval(size);
 
     if (!this.animatedArr.isRunning()) {
       this.animatedArr = new AnimatedArray(SortMe.randomArr(size), this.renderScreen, this.interval);
@@ -63,5 +67,9 @@ class SortMe {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+  }
+
+  static getInterval(size) {
+    return INTERVAL_DELTA / size;
   }
 }

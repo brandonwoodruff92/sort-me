@@ -75,6 +75,9 @@ class AnimatedArray {
         case Algorithms.MERGE_SORT:
           this.mergeSort();
           break;
+        case Algorithms.HEAP_SORT:
+          this.heapSort();
+          break;
         default:
           break;
       }
@@ -258,6 +261,55 @@ class AnimatedArray {
         this._swap(left, right);
         right++;
       }
+    }
+  }
+
+  heapSort() {
+    let left = 0;
+    let right = this.arr.length - 1;
+
+    let start = Math.floor(this.arr.length / 2) - 1 + left;
+
+    while (start >= left) {
+      this._siftDown(start, right, left, right);
+      start--;
+    }
+
+    let end = right;
+    while (end > left) {
+      this._swap(end, left);
+      end--;
+      this._siftDown(left, end, left, right);
+    }
+  }
+
+  _siftDown(start, end, left, right) {
+    let root = start;
+
+    while (true) {
+      let leftChild = 2 * (root - left) + 1 + left;
+      let rightChild = 2 * (root - left) + 2 + left;
+
+      if (leftChild > end) {
+        break;
+      }
+
+      let swap = root;
+
+      if (this._compare(swap, leftChild) === -1) {
+        swap = leftChild;
+      }
+
+      if (rightChild <= end && this._compare(swap, rightChild) === -1)  {
+        swap = rightChild;
+      }
+
+      if (swap === root) {
+        return;
+      }
+
+      this._swap(root, swap);
+      root = swap;
     }
   }
 
