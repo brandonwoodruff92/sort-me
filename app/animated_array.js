@@ -44,6 +44,7 @@ class AnimatedArray {
     this._step = this._step.bind(this);
     this.intervalAmount = interval;
     this.isSorted = false;
+    this.comparisons = 0;
     this._render();
   }
 
@@ -83,6 +84,7 @@ class AnimatedArray {
   shuffle() {
     SortMe._shuffle(this.arr);
     this.displayArr = new DisplayArray(this.arr, this.renderScreen);
+    this.comparisons = 0;
   }
 
   setSort(sort) {
@@ -107,6 +109,9 @@ class AnimatedArray {
 
       this.renderScreen.appendChild(barContainer);
     }
+
+    const comparisons = document.querySelector(".comparison-counter");
+    comparisons.innerHTML = `Comparisons: ${this.comparisons}`;
   }
 
   _prepareBar(barContainer, hueRotate, state) {
@@ -251,6 +256,7 @@ class AnimatedArray {
         left++;
       } else {
         this._swap(left, right);
+        right++;
       }
     }
   }
@@ -271,9 +277,11 @@ class AnimatedArray {
     const i = action[0];
     const j = action[1];
     const actionType = action[2];
-    console.log(`sending action: ${action}`);
-    console.log(`action buffer: ${this.actionBuffer.length()}`);
     this.displayArr.sendAction(action);
+
+    if (actionType === Actions.COMPARE) {
+      this.comparisons++;
+    }
 
     this._render();
     this.displayArr.setState(i, States.DEFAULT_STATE);

@@ -24,6 +24,15 @@
   position: relative;
 }
 
+.comparison-counter {
+  position: absolute;
+  font-family: 'Permanent Marker', cursive;
+  color: #FFE500;
+  font-size: 35px;
+  top: 10px;
+  right: 50px;
+}
+
 .sorting-menu {
   position: absolute;
   bottom: 0;
